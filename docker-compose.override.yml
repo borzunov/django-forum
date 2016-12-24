@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  db:
+    env_file: ./development.env
+    volumes:
+      - /var/lib/mysql
+
+  web:
+    command: runserver
+    env_file: ./development.env
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./web:/app:ro
