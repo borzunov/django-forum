@@ -1,7 +1,7 @@
 from itertools import zip_longest
 
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import PostForm, TopicForm
@@ -66,3 +66,13 @@ def create_post(request, section_id, topic_id):
 
     Post.objects.create(topic=topic, content=form.cleaned_data['content'], author=request.user)
     return redirect('forum:show-topic', section_id=section_id, topic_id=topic.id)
+
+
+@login_required
+def delete_post(request, post_id):
+    if not request.user.is_superuser:
+        return HttpResponseForbidden('Только администратор может удалять сообщения')
+
+    post = get_object_or_404(Post, id=post_id)
+    post.delete()
+    return redirect('forum:show-topic', section_id=post.topic.section.id, topic_id=post.topic.id)

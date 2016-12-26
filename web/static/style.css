@@ -91,7 +91,7 @@ table a {
     font-size: 14px;
 }
 
-.message-header :nth-child(odd) {
+.message-header li:nth-child(odd) {
     font-style: italic;
 }
 

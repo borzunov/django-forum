@@ -24,11 +24,16 @@
         <ul class="list-inline message-header">
             <li>#{{ forloop.counter }}</li>
             <li>{{ post.created }}</li>
-            {% if post.edited is not None %}
-            <li>изменено через {{ post.edited|timesince:post.created }}</li>
+            <li>
+                {% if post.edited is not None %}
+                изменено через {{ post.edited|timesince:post.created }}
+                {% endif %}
+            </li>
+            {% if request.user.is_superuser %}
+            <li><a href="{% url 'forum:delete-post' post.id %}" class="delete-post">Удалить</a></li>
             {% endif %}
         </ul>
-        <div class="message-content">{{ post.content|linebreaks }}</div>
+        <div class="message-content well">{{ post.content|linebreaks }}</div>
     </div>
 </section>
 {% endfor %}
@@ -55,4 +60,13 @@
     </div>
 </div>
 {% endif %}
+
+<script>
+    $(function () {
+        $('.delete-post').click(function (event) {
+            if (!confirm('Вы действительно хотите удалить сообщение?'))
+                event.preventDefault();
+        });
+    });
+</script>
 {% endblock %}
