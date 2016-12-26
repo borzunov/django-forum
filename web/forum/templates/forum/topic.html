@@ -15,7 +15,10 @@
 {% for post in posts %}
 <section class="row">
     <div class="col-xs-2">
-        <a href="" class="user">{{ post.author.username }}</a>
+        <p><a href="{% url 'profiles:show' post.author.username %}" class="user">{{ post.author.username }}</a></p>
+        <div class="short-profile">
+            <p>Сообщений: {{ post.author_profile.post_count }}</p>
+        </div>
     </div>
     <div class="col-xs-10">
         <ul class="list-inline message-header">
@@ -37,13 +40,13 @@
         <div class="well">
             {% bootstrap_messages %}
 
-            <form class="form" method="post"
+            <form class="form post-form" method="post"
                   action="{% url 'forum:create-post' section_id=topic.section.id topic_id=topic.id %}">
                 <h4>Новое сообщение</h4>
+
                 {% csrf_token %}
-                <div class="form-group">
-                    <textarea name="content" class="form-control" rows="5" placeholder="Сообщение"></textarea>
-                </div>
+                {% bootstrap_form post_form %}
+
                 {% buttons %}
                 <button type="submit" class="btn btn-primary">Отправить</button>
                 {% endbuttons %}

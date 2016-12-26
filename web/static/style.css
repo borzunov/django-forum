@@ -87,7 +87,7 @@ table a {
     font-weight: bold;
 }
 
-.message-header {
+.message-header, .short-profile {
     font-size: 14px;
 }
 
@@ -102,4 +102,8 @@ table a {
 
 .alert .close {
     display: none;
+}
+
+.post-form textarea {
+    height: 150px;
 }

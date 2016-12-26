@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block title %}Регистрация &mdash; {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="bs-component">
+    <ul class="breadcrumb">
+        <li><a href="{% url 'forum:index' %}">Форум</a></li>
+        <li class="active">Регистрация</li>
+    </ul>
+</div>
+
+<div class="well">
+    {% bootstrap_messages %}
+
+    <form class="form-horizontal" method="post" action="{% url 'profiles:signup' %}">
+        <h4>Регистрация</h4>
+
+        {% csrf_token %}
+        {% bootstrap_form form layout="horizontal" %}
+        <input type="hidden" name="next" value="{{ next }}" />
+
+        {% buttons %}
+        <div class="col-lg-3"></div>
+        <div class="col-lg-9">
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+        </div>
+        {% endbuttons %}
+    </form>
+</div>
+{% endblock %}

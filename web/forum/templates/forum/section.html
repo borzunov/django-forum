@@ -32,13 +32,13 @@
         <tr>
             <td><a href="{% url 'forum:show-topic' section.id topic.id %}">{{ topic.title }}</a></td>
             <td>
-                <div><a href="" class="user">{{ topic.author.username }}</a></div>
+                <div><a href="{% url 'profiles:show' topic.author.username %}" class="user">{{ topic.author.username }}</a></div>
                 <div>{{ topic.created }}</div>
             </td>
             <td>
                 {% with last_message=topic.last_message %}
                 {% if last_message is not None %}
-                <div><a href="" class="user">{{ topic.last_message.author.username }}</a></div>
+                <div><a href="{% url 'profiles:show' topic.last_message.author.username %}" class="user">{{ topic.last_message.author.username }}</a></div>
                 <div>{{ topic.last_message.created|timesince }} назад</div>
                 {% endif %}
                 {% endwith %}

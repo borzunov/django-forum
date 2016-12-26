@@ -17,11 +17,13 @@
             <nav>
                 <ul class="nav nav-pills pull-right">
                     {% if request.user.is_authenticated %}
-                    <li role="presentation"><a href="" class="user">{{ request.user.username }}</a></li>
+                    <li role="presentation">
+                        <a href="{% url 'profiles:show' request.user.username %}" class="user">{{ request.user.username }}</a>
+                    </li>
                     <li role="presentation"><a href="{% url 'logout' %}">Выход</a></li>
                     {% else %}
                     <li role="presentation"><a href="{% url 'login' %}?next={{ request.path }}">Вход</a></li>
-                    <li role="presentation"><a href="#">Регистрация</a></li>
+                    <li role="presentation"><a href="{% url 'profiles:signup' %}?next={{ request.path }}">Регистрация</a></li>
                     {% endif %}
                 </ul>
             </nav>

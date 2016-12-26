@@ -4,20 +4,21 @@
 {% block title %}Вход - {{ block.super }}{% endblock %}
 
 {% block content %}
-<div class="col-md-2"></div>
-<div class="col-md-8">
+<div class="col-lg-2"></div>
+<div class="col-lg-8">
 <div class="well">
     {% bootstrap_messages %}
 
     <form class="form-horizontal" method="post" action="{% url 'login' %}">
-        <h3>Вход</h3>
+        <h4>Вход</h4>
+
         {% csrf_token %}
         {% bootstrap_form form layout="horizontal" %}
         <input type="hidden" name="next" value="{{ next }}" />
 
         {% buttons %}
-        <div class="col-md-3"></div>
-        <div class="col-md-9">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-9">
             <button type="submit" class="btn btn-primary">Войти</button>
         </div>
         {% endbuttons %}

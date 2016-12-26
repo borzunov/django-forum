@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }} &mdash; {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="bs-component">
+    <ul class="breadcrumb">
+        <li><a href="{% url 'forum:index' %}">Форум</a></li>
+        <li>Пользователи</li>
+        <li class="active">{{ profile.username }}</li>
+    </ul>
+</div>
+
+<header>
+    <h2>{{ profile.username }}</h2>
+</header>
+
+<p>Сообщений на форуме: {{ profile.post_count }}</p>
+<p>Новых тем на форуме: {{ profile.new_topic_count }}</p>
+{% endblock %}

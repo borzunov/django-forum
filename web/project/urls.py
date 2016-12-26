@@ -20,6 +20,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^', include('forum.urls', namespace='forum')),
+    url(r'^', include('profiles.urls', namespace='profiles')),
 
     url(r'^login/$', django.contrib.auth.views.login, name='login'),
     url(r'^logout/$', django.contrib.auth.views.logout, name='logout'),

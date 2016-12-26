@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import truncatechars
@@ -42,6 +43,11 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created = models.DateTimeField(auto_now_add=True)
     edited = models.DateTimeField(blank=True, null=True)
+
+    @property
+    def author_profile(self):
+        Profile = apps.get_model('profiles', 'Profile')
+        return Profile.objects.get(id=self.author.id)
 
     def __str__(self):
         return '{} / {} / {} ({})'.format(

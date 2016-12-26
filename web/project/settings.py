@@ -32,13 +32,14 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'forum.apps.ForumConfig',
+    'profiles.apps.ProfilesConfig',
+    'bootstrap3',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -136,4 +137,4 @@ LOGIN_URL = 'login'
 
 LOGOUT_URL = 'logout'
 
-LOGIN_REDIRECT_URL = LOGOUT_REDIRECT_URL = 'forum:index'
+LOGIN_REDIRECT_URL = LOGOUT_REDIRECT_URL = '/'
