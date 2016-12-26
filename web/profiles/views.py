@@ -1,12 +1,16 @@
+from datetime import timedelta
+
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 from django.utils.crypto import constant_time_compare
 
 from .forms import SignupForm
-from .models import Profile
+from .models import Profile, Visitor
 from .utils import get_activation_hash, send_activation_email
 
 
@@ -51,3 +55,10 @@ def activate(request, username):
     else:
         messages.error(request, 'Это ссылка не подходит для активации аккаунта {}'.format(username))
     return redirect('login')
+
+
+def get_visitors(request):
+    visitors = Visitor.objects.filter(last_seen__gt=timezone.now() - timedelta(minutes=1)).order_by('-last_seen')
+    return JsonResponse({
+        'usernames': [item.user.username for item in visitors],
+    })

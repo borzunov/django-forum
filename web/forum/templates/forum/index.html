@@ -40,4 +40,28 @@
     {% endfor %}
 </div>
 {% endfor %}
+
+<div class="row forum-section">
+    <div class="col-lg-6">
+        <h4>Сейчас на сайте</h4>
+        <div class="visitors">Загружается...</div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+    function updateVisitors() {
+        $.get('/visitors', function (data) {
+            var chunks = [];
+            data.usernames.forEach(function (username) {
+                var escaped = $('<div/>').text(username).html();
+                chunks.push('<a href="/profile/' + escaped + '" class="user">' + escaped + '</a>');
+            });
+            $('.visitors').html(chunks.join(', '));
+        });
+    }
+
+    updateVisitors();
+    setInterval(updateVisitors, 3000);
+</script>
 {% endblock %}
