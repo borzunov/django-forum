@@ -1,12 +1,13 @@
 from django.conf import settings
-from django.contrib.auth import authenticate, login
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.crypto import constant_time_compare
 
 from .forms import SignupForm
 from .models import Profile
+from .utils import get_activation_hash, send_activation_email
 
 
 def show(request, username):
@@ -23,14 +24,14 @@ def signup(request):
         if form.is_valid():
             fields = form.cleaned_data
             try:
-                User.objects.create_user(fields['username'], fields['email'], fields['password'])
+                User.objects.create_user(fields['username'], fields['email'], fields['password'], is_active=False)
             except IntegrityError:
                 form.add_error('username', 'Пользователь с таким именем уже существует')
             else:
-                user = authenticate(username=fields['username'], password=fields['password'])
-                login(request, user)
+                send_activation_email(request, fields['username'], fields['email'])
 
-                return HttpResponseRedirect(request.POST.get('next', settings.LOGIN_REDIRECT_URL))
+                messages.success(request, 'Ссылка для активации аккаунта отправлена на {}'.format(fields['email']))
+                return redirect('login')
     else:
         form = SignupForm()
 
@@ -38,3 +39,15 @@ def signup(request):
         'form': form,
         'next': request.GET.get('next', settings.LOGIN_REDIRECT_URL),
     })
+
+
+def activate(request, username):
+    if constant_time_compare(request.GET.get('hash', ''), get_activation_hash(username)):
+        user = User.objects.get(username=username)
+        user.is_active = True
+        user.save()
+
+        messages.success(request, 'Аккаунт {} активирован, теперь можно войти на сайт'.format(username))
+    else:
+        messages.error(request, 'Это ссылка не подходит для активации аккаунта {}'.format(username))
+    return redirect('login')

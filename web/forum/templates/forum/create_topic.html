@@ -13,11 +13,11 @@
 </div>
 
 <div class="well">
-    {% bootstrap_messages %}
-
     <form class="form" method="post"
           action="{% url 'forum:create-post' section_id=section.id %}">
         <h4>Новая тема</h4>
+
+        {% bootstrap_messages %}
 
         {% csrf_token %}
         {% bootstrap_form form %}

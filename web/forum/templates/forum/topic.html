@@ -38,11 +38,11 @@
     <div class="col-lg-2"></div>
     <div class="col-lg-10">
         <div class="well">
-            {% bootstrap_messages %}
-
             <form class="form post-form" method="post"
                   action="{% url 'forum:create-post' section_id=topic.section.id topic_id=topic.id %}">
                 <h4>Новое сообщение</h4>
+
+                {% bootstrap_messages %}
 
                 {% csrf_token %}
                 {% bootstrap_form post_form %}

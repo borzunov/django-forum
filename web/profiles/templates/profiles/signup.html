@@ -12,10 +12,10 @@
 </div>
 
 <div class="well">
-    {% bootstrap_messages %}
-
     <form class="form-horizontal" method="post" action="{% url 'profiles:signup' %}">
         <h4>Регистрация</h4>
+
+        {% bootstrap_messages %}
 
         {% csrf_token %}
         {% bootstrap_form form layout="horizontal" %}

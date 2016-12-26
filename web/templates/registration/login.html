@@ -7,10 +7,10 @@
 <div class="col-lg-2"></div>
 <div class="col-lg-8">
 <div class="well">
-    {% bootstrap_messages %}
-
     <form class="form-horizontal" method="post" action="{% url 'login' %}">
         <h4>Вход</h4>
+
+        {% bootstrap_messages %}
 
         {% csrf_token %}
         {% bootstrap_form form layout="horizontal" %}
