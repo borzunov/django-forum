@@ -57,7 +57,8 @@
                 var escaped = $('<div/>').text(username).html();
                 chunks.push('<a href="/profile/' + escaped + '" class="user">' + escaped + '</a>');
             });
-            $('.visitors').html(chunks.join(', '));
+            var code = (chunks.length > 0) ? chunks.join(', ') : 'Нет пользователей онлайн';
+            $('.visitors').html(code);
         });
     }
 

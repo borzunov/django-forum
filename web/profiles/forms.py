@@ -1,4 +1,5 @@
 from django import forms
+from captcha.fields import ReCaptchaField
 
 
 class SignupForm(forms.Form):
@@ -9,6 +10,8 @@ class SignupForm(forms.Form):
     password = forms.CharField(label='Пароль', min_length=6, max_length=30, widget=forms.PasswordInput,
                                help_text='От 6 до 30 символов')
     confirm_password = forms.CharField(label='Повторите пароль', max_length=30, widget=forms.PasswordInput)
+
+    captcha = ReCaptchaField()
     accept_agreement = forms.BooleanField(label='Обязуюсь соблюдать на форуме законы РФ', required=True)
 
     def clean_confirm_password(self):

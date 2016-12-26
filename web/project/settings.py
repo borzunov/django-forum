@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'forum.apps.ForumConfig',
     'profiles.apps.ProfilesConfig',
     'bootstrap3',
+    'captcha',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -141,6 +142,16 @@ LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = LOGOUT_REDIRECT_URL = '/'
 
 
-SERVICE_EMAIL = 'no-reply.programming-forum@yandex.ru'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SERVICE_EMAIL = os.environ['SERVICE_EMAIL']
+
+EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_PORT = int(os.environ['EMAIL_PORT'])
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_USE_TLS = True
+
+
+RECAPTCHA_PUBLIC_KEY = os.environ['RECAPTCHA_PUBLIC_KEY']
+RECAPTCHA_PRIVATE_KEY = os.environ['RECAPTCHA_PRIVATE_KEY']
