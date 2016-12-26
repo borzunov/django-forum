@@ -30,7 +30,12 @@
                 {% endif %}
             </li>
             {% if request.user.is_superuser %}
-            <li><a href="{% url 'forum:delete-post' post.id %}" class="delete-post">Удалить</a></li>
+            <li>
+                <form method="post" action="{% url 'forum:delete-post' post.id %}">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-link btn-xs delete-post" value="Удалить">
+                </form>
+            </li>
             {% endif %}
         </ul>
         <div class="message-content well">{{ post.content|linebreaks }}</div>
