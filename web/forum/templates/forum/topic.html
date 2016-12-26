@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block title %}{{ topic.title }} &mdash; {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="bs-component">
+    <ul class="breadcrumb">
+        <li><a href="{% url 'forum:index' %}">Форум</a></li>
+        <li><a href="{% url 'forum:show-section' topic.section.id %}">{{ topic.section.title }}</a></li>
+        <li class="active">{{ topic.title }}</li>
+    </ul>
+</div>
+
+{% for post in posts %}
+<section class="row">
+    <div class="col-xs-2">
+        <a href="" class="user">{{ post.author.username }}</a>
+    </div>
+    <div class="col-xs-10">
+        <ul class="list-inline message-header">
+            <li>#{{ forloop.counter }}</li>
+            <li>{{ post.created }}</li>
+            {% if post.edited is not None %}
+            <li>изменено через {{ post.edited|timesince:post.created }}</li>
+            {% endif %}
+        </ul>
+        <div class="message-content">{{ post.content|linebreaks }}</div>
+    </div>
+</section>
+{% endfor %}
+
+{% if request.user.is_authenticated %}
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-10">
+        <div class="well">
+            {% bootstrap_messages %}
+
+            <form class="form" method="post"
+                  action="{% url 'forum:create-post' section_id=topic.section.id topic_id=topic.id %}">
+                <h4>Новое сообщение</h4>
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea name="content" class="form-control" rows="5" placeholder="Сообщение"></textarea>
+                </div>
+                {% buttons %}
+                <button type="submit" class="btn btn-primary">Отправить</button>
+                {% endbuttons %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
