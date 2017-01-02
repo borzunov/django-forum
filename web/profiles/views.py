@@ -30,11 +30,11 @@ def signup(request):
             try:
                 User.objects.create_user(fields['username'], fields['email'], fields['password'], is_active=False)
             except IntegrityError:
-                form.add_error('username', 'Пользователь с таким именем уже существует')
+                form.add_error('username', 'User with this name already exists')
             else:
                 send_activation_email(request, fields['username'], fields['email'])
 
-                messages.success(request, 'Ссылка для активации аккаунта отправлена на {}'.format(fields['email']))
+                messages.success(request, 'Activation link sent to {}'.format(fields['email']))
                 return redirect('login')
     else:
         form = SignupForm()
@@ -51,9 +51,9 @@ def activate(request, username):
         user.is_active = True
         user.save()
 
-        messages.success(request, 'Аккаунт {} активирован, теперь можно войти на сайт'.format(username))
+        messages.success(request, 'Account {} have been activated, now you can log in'.format(username))
     else:
-        messages.error(request, 'Это ссылка не подходит для активации аккаунта {}'.format(username))
+        messages.error(request, 'This link is not suitable for activation of account "{}"'.format(username))
     return redirect('login')
 
 

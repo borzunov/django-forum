@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
 
-{% block title %}Вход - {{ block.super }}{% endblock %}
+{% block title %}Log in - {{ block.super }}{% endblock %}
 
 {% block content %}
 <div class="col-lg-2"></div>
 <div class="col-lg-8">
 <div class="well">
     <form class="form-horizontal" method="post" action="{% url 'login' %}">
-        <h4>Вход</h4>
+        <h4>Log in</h4>
 
         {% bootstrap_messages %}
 
@@ -19,7 +19,7 @@
         {% buttons %}
         <div class="col-lg-3"></div>
         <div class="col-lg-9">
-            <button type="submit" class="btn btn-primary">Войти</button>
+            <button type="submit" class="btn btn-primary">Log in</button>
         </div>
         {% endbuttons %}
     </form>

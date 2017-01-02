@@ -2,8 +2,8 @@
 
 {% block content %}
 <div class="jumbotron">
-    <h2>Программирование на матмехе</h2>
-    <p class="lead">Обсудите предметы, которые вас волнуют или восхищают</p>
+    <h2>University forum</h2>
+    <p class="lead">Discuss subjects you worried or excited about</p>
 </div>
 
 {% for row in section_rows %}
@@ -23,7 +23,7 @@
                     <div><a href="{% url 'forum:show-topic' section.id topic.id %}">{{ topic.title }}</a></div>
                     <div class="text-right">
                         <a href="{% url 'profiles:show' topic.last_message.author.username %}" class="user">{{ topic.last_message.author.username }}</a>,
-                        {{ topic.last_message.created|timesince }} назад
+                        {{ topic.last_message.created|timesince }} ago
                     </div>
                 </li>
                 {% endfor %}
@@ -31,7 +31,7 @@
 
             <p>
                 <a href="{% url 'forum:show-section' section.id %}" class="btn btn-sm btn-default pull-right">
-                    Все темы →
+                    All topics →
                 </a>
             </p>
         </section>
@@ -43,8 +43,8 @@
 
 <div class="row forum-section">
     <div class="col-lg-6">
-        <h4>Сейчас на сайте</h4>
-        <div class="visitors">Загружается...</div>
+        <h4>Users online</h4>
+        <div class="visitors">Loading...</div>
     </div>
 </div>
 
@@ -56,7 +56,7 @@
                 var escaped = $('<div/>').text(username).html();
                 chunks.push('<a href="/profile/' + escaped + '" class="user">' + escaped + '</a>');
             });
-            var code = (chunks.length > 0) ? chunks.join(', ') : 'Нет пользователей онлайн';
+            var code = (chunks.length > 0) ? chunks.join(', ') : 'No users online';
             $('.visitors').html(code);
         });
     }

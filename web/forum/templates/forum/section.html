@@ -5,7 +5,7 @@
 {% block content %}
 <div class="bs-component">
     <ul class="breadcrumb">
-        <li><a href="{% url 'forum:index' %}">Форум</a></li>
+        <li><a href="{% url 'forum:index' %}">Forum</a></li>
         <li class="active">{{ section.title }}</li>
     </ul>
 </div>
@@ -16,15 +16,15 @@
 </header>
 
 <p>
-    <a href="{% url 'forum:create-topic' section.id %}" class="btn btn-sm btn-default">Создать тему</a>
+    <a href="{% url 'forum:create-topic' section.id %}" class="btn btn-sm btn-default">New topic</a>
 </p>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Тема</th>
-            <th>Создана</th>
-            <th>Обновлена</th>
+            <th>Topic</th>
+            <th>Created</th>
+            <th>Updated</th>
         </tr>
     </thead>
     <tbody>
@@ -39,7 +39,7 @@
                 {% with last_message=topic.last_message %}
                 {% if last_message is not None %}
                 <div><a href="{% url 'profiles:show' topic.last_message.author.username %}" class="user">{{ topic.last_message.author.username }}</a></div>
-                <div>{{ topic.last_message.created|timesince }} назад</div>
+                <div>{{ topic.last_message.created|timesince }} ago</div>
                 {% endif %}
                 {% endwith %}
             </td>

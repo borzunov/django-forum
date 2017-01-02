@@ -14,7 +14,7 @@ def send_activation_email(request, username, email):
         'url': request.build_absolute_uri(activation_url),
         'username': username,
     }
-    send_mail('Программисты матмеха: активация аккаунта на форуме', template.render(context),
+    send_mail('University forum: activating account', template.render(context),
               settings.SERVICE_EMAIL, [email])
 
 

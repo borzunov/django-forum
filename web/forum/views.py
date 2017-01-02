@@ -71,7 +71,7 @@ def create_post(request, section_id, topic_id):
 @login_required
 def delete_post(request, post_id):
     if not request.user.is_superuser:
-        return HttpResponseForbidden('Только администратор может удалять сообщения')
+        return HttpResponseForbidden('Only admin can delete posts')
 
     post = get_object_or_404(Post, id=post_id)
     post.delete()
