@@ -51,13 +51,14 @@
 <script>
     function updateVisitors() {
         $.get('/visitors', function (data) {
-            var chunks = [];
-            data.usernames.forEach(function (username) {
-                var escaped = $('<div/>').text(username).html();
-                chunks.push('<a href="/profile/' + escaped + '" class="user">' + escaped + '</a>');
+            var links = data.usernames.map(function (username) {
+                var el = $('<a class="user"></a>')
+                    .attr('href', '/profile/' + username)
+                    .text(username);
+                return el.prop('outerHTML');
             });
-            var code = (chunks.length > 0) ? chunks.join(', ') : 'No users online';
-            $('.visitors').html(code);
+            var content = (links.length > 0) ? links.join(', ') : 'No users online';
+            $('.visitors').html(content);
         });
     }
 

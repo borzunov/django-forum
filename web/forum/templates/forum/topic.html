@@ -67,11 +67,9 @@
 {% endif %}
 
 <script>
-    $(function () {
-        $('.delete-post').click(function (event) {
-            if (!confirm('Are you sure you want to delete this message?'))
-                event.preventDefault();
-        });
+    $('.delete-post').click(function (event) {
+        if (!confirm('Are you sure you want to delete this message?'))
+            event.preventDefault();
     });
 </script>
 {% endblock %}
