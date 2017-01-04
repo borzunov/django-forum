@@ -1,7 +1,9 @@
-forum
-=====
+django-forum
+============
 
-Toy dockerized Django forum
+<p align="center">
+    <img src="docs/screenshot.png">
+</p>
 
 Description
 -----------
@@ -12,7 +14,7 @@ in development (instead of [virtualenv](https://virtualenv.pypa.io/en/stable/)) 
 The website contains several components: a MySQL server, a Django back-end, and nginx (which is placed in front of them
 production mode).
 Thanks to Compose, you don't need to install, configure, or start these components yourself (either in development or
-in production).
+production).
 All configuration is stored inside this repository, so Compose can pull and run all these servers
 in isolated containers for you.
 
@@ -22,5 +24,3 @@ Once you wrote proper configuration files, it's enough for other developers in y
 to pull the repository and restart Compose.
 
 In addition, separation processes for containers gives additional scalability and security.
-
-![Screenshot](docs/screenshot.png)
