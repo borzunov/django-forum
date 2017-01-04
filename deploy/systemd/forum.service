@@ -1,0 +1,14 @@
+[Unit]
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+WorkingDirectory=/var/www/forum
+ExecStartPre=-/usr/local/bin/docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
+ExecStart=/usr/local/bin/docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build
+ExecStop=/usr/local/bin/docker-compose -f docker-compose.yml -f docker-compose.prod.yml stop
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
