@@ -12,7 +12,7 @@ This forum is mainly an example of how [Docker Compose](https://docs.docker.com/
 in development (instead of [virtualenv](https://virtualenv.pypa.io/en/stable/)) and deployment of a Django website.
 
 The website contains several components: a MySQL server, a Django back-end, and nginx (which is placed in front of them
-production mode).
+in production mode).
 Thanks to Compose, you don't need to install, configure, or start these components yourself (either in development or
 production).
 All configuration is stored inside this repository, so Compose can pull and run all these servers
