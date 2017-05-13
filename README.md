@@ -15,7 +15,7 @@ The website contains several components: a MySQL server, a Django back-end, and 
 in production mode).
 Thanks to Compose, you don't need to install, configure, or start these components yourself (either in development or
 production).
-All configuration is stored inside this repository, so Compose can pull and run all these servers
+All configuration is stored in this repository, so Compose can pull and run all these servers
 in isolated containers for you.
 
 Furthermore, it's easy to plug in new components (e.g. Celery for background processing or
@@ -23,7 +23,7 @@ Elasticsearch for full-text search).
 Once you wrote and pushed proper configuration files, it's enough for other developers in your team
 to pull the repository and restart Compose.
 
-In addition, separation processes for containers gives additional scalability and security.
+Besides, isolation of processes in containers gives additional scalability and security.
 
 Setting up a development environment
 ------------------------------------
@@ -45,7 +45,7 @@ Setting up a development environment
 4. Wait a minute, while containers are downloading, MySQL is setting up,
    and Django migrations are applied to the newly created database.
 
-    The development server will be started at [http://localhost:8000/](http://localhost:8000/).
+    The development server will start at [http://localhost:8000/](http://localhost:8000/).
     It will watch for changes in `web` directory and (usually) load a new version of code automatically.
 
 5. To create a superuser or make migrations for a Django app, you can call `manage.py` in the following way:
